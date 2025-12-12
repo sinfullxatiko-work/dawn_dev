@@ -41,7 +41,18 @@ if (!customElements.get('product-form')) {
           this.cart.setActiveElement(document.activeElement);
         }
         config.body = formData;
-
+        fetch(window.Shopify.routes.root + 'cart.js', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({})
+        })
+          .then(response => response.json())
+          .then(data => { console.log(data) })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
         fetch(`${routes.cart_add_url}`, config)
           .then((response) => response.json())
           .then((response) => {
@@ -124,16 +135,19 @@ if (!customElements.get('product-form')) {
         }
       }
 
-      toggleSubmitButton(disable = true, text) {
+      toggleSubmitButton(disable = true, text, isPreorder = false) {
         if (disable) {
           this.submitButton.setAttribute('disabled', 'disabled');
           if (text) this.submitButtonText.textContent = text;
         } else {
           this.submitButton.removeAttribute('disabled');
-          this.submitButtonText.textContent = window.variantStrings.addToCart;
+          if (isPreorder) {
+            this.submitButtonText.textContent = "Pre-order";
+          } else {
+            this.submitButtonText.textContent = window.variantStrings.addToCart;
+          }
         }
       }
-
       get variantIdInput() {
         return this.form.querySelector('[name=id]');
       }

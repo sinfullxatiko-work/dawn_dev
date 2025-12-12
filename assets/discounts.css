@@ -1,0 +1,44 @@
+.applied__codes {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+.discount-form {
+  display: flex;
+}
+.discount-form__error-message {
+  color: #9a5630;
+}
+.discount-form__apply-button,
+.discount__remove-button {
+  display: inline-block;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 0;
+  background-color: #404040;
+  color: #fff;
+  font-size: 16px;
+}
+.btn,
+.discount__remove-button {
+  display: inline-block;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 0;
+  background-color: #404040;
+  color: #fff;
+  font-size: 16px;
+}
+.discount {
+  display: flex;
+}
+.discount-form__apply-button:hover,
+.discount__remove-button:hover {
+  background-color: #000;
+  cursor: pointer;
+}
+.discount {
+  display: grid;
+  grid-template-columns: 100px 30px;
+  gap: 10px;
+}
