@@ -1,6 +1,5 @@
 {% comment %}
   Renders cart drawer
-
   Usage:
   {% render 'cart-drawer' %}
 {% endcomment %}
@@ -17,7 +16,7 @@
   }
 </style>
 
-<cart-drawer class="drawer{% if cart == empty %} is-empty{% endif %}">
+<cart-drawer class="drawer{% if cart == empty %} is-empty{% endif %}" id="drawer123">
   <div id="CartDrawer" class="cart-drawer">
     <div id="CartDrawer-Overlay" class="cart-drawer__overlay"></div>
     <div
@@ -258,7 +257,10 @@
                             {%- endif -%}
 
                             {%- if item.variant.available and item.unit_price_measurement -%}
-                              {% render 'unit-price', price: item.unit_price, measurement: item.unit_price_measurement %}
+                              {% render 'unit-price',
+                                price: item.unit_price,
+                                measurement: item.unit_price_measurement
+                              %}
                             {%- endif -%}
                           </div>
                         </td>
@@ -474,6 +476,7 @@
           <div id="CartDrawer-CartErrors" role="alert"></div>
         </form>
       </cart-drawer-items>
+      {% render 'discount-form', section_id: section.id %}
       <div class="drawer__footer">
         {%- if settings.show_cart_note -%}
           <details id="Details-CartDrawer">
@@ -560,7 +563,6 @@
         </div>
 
         <!-- CTAs -->
-
         <div class="cart__ctas" {{ block.shopify_attributes }}>
           <button
             type="submit"

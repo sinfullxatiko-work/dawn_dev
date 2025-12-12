@@ -36,7 +36,7 @@
           >{{ cart.note }}</textarea>
         </cart-note>
       {%- endif -%}
-
+      {% render 'discount-form', section_id: section.id %}
       <div class="cart__blocks">
         {% for block in section.blocks %}
           {%- case block.type -%}
@@ -147,7 +147,7 @@
     {
       "type": "header",
       "content": "t:sections.all.padding.section_padding_heading"
-    },    
+    },
     {
       "type": "range",
       "id": "padding_top",
