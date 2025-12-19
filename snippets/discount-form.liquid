@@ -1,0 +1,31 @@
+{{ 'discounts.css' | asset_url | stylesheet_tag }}
+{% comment %}
+  Accepts:
+  - section_id: {String}
+  Usage:
+  {%  render 'discount-form', section_id: section.id %}
+{% endcomment %}
+<discount-form class="discount-form">
+  <form action="/cart/update" data-section="{{ section_id }}">
+    <label for="discount-input">{{ 'sections.cart.promocode_input_label' | t }}</label>
+    <input type="text" id="discount-input">
+    <div class="discount-form__error-message"></div>
+    <div class="discount-form__buttons">
+      <button type="submit" class="discount-form__apply-button">
+        {{ 'sections.cart.promocode_apply_button' | t }}
+      </button>
+      <button type="button" class="discount-form__show-cart-button">Console Cart</button>
+    </div>
+    <div class="discount-form__current-discounts">
+      {% for discount in cart.discount_applications %}
+        <div class="discount-form__discount discount">
+          <span class="discount__title">{{ discount.title }}</span>
+          <button type="button" class="discount__remove-button" value="{{ discount.title |  downcase }}">X</button>
+        </div>
+      {% endfor %}
+    </div>
+  </form>
+</discount-form>
+
+<!-- <script src="{{ 'discounts.js' |  asset_url }}" defer="defer"></script> -->
+<script src="{{ 'discounts-v2.js' | asset_url }}" defer="defer"></script>

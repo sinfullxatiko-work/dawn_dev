@@ -478,6 +478,8 @@
               {%- when 'variant_picker' -%}
                 {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
               {%- when 'buy_buttons' -%}
+                {{ product.selected_or_first_available_variant.inventory_quantity }}
+                {{ product.selected_or_first_available_variant.inventory_policy }}
                 {%- render 'buy-buttons',
                   block: block,
                   product: product,
@@ -735,6 +737,20 @@
     <script type="application/ld+json">
       {{ product | structured_data }}
     </script>
+    {% if product.tags contains 'preorder' %}
+      <script type="application/json" data-preorder>
+        {
+        {% for variant in product.variants %}
+          "{{ variant.id }}": {% if variant.inventory_quantity == 0 and variant.inventory_policy == 'continue' %}
+            true
+            {% else %}
+            false
+          {% endif %}
+          {% unless forloop.last %},{% endunless %}
+        {% endfor %}
+        }
+      </script>
+    {% endif %}
   </div>
 </product-info>
 

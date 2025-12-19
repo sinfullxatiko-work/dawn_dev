@@ -1,0 +1,15 @@
+{{ 'shipping-rates.css' | asset_url | stylesheet_tag }}
+<shipping-calculator>
+  <div class="error-message"></div>
+  <form action="" id="shipping-form">
+    <select name="shipping_address[country]" id="country">
+      <option value="">Select country</option>
+      {{ all_country_option_tags }}
+    </select>
+    <input type="text" name="shipping_address[province]" class="province-input">
+    <input type="text" name="shipping_address[zip]" class="zip-input">
+    <button type="submit">Calculate</button>
+  </form>
+  <div class="delivery-rates"></div>
+</shipping-calculator>
+<script src="{{ 'shipping.js' |  asset_url }}" defer="defer"></script>
